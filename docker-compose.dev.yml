@@ -1,0 +1,15 @@
+# Dev mode: runs the Vite dev server in the app container with the source
+# mounted, so edits hot-reload. Use together with the base file:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+services:
+  app:
+    build:
+      target: dev
+    restart: 'no'
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./:/app
+      # Keep the container's own Linux node_modules instead of the host's.
+      - /app/node_modules
